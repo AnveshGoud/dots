@@ -1,15 +1,12 @@
 
 export EDITOR='vim'
-export PASSWORD='po.nha3t52cRhw'
 export FZF_BASE='/usr/local/opt/fzf/'
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-export PATH=$PATH:/User/adindu/.poetry/bin
-
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/adindu/.oh-my-zsh"
+export ZSH="/home/anarch/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -183,35 +180,6 @@ alias del='rm -i'
 alias bye=exit
 alias ciao=exit
 
-###########################################################################################
-#VPN Aliases
-##########################################################################################
-function jye() {
-	sudo openconnect -v --protocol=gp --usergroup=gateway --user adindu --servercert pin-sha256:RaszCRj9E7cTomU32iJT3nWEuTc9xRbHOhp035fWOXs= vpn-gw1.qvantel.net
-}
-
-function jyd() {
-	sudo openconnect -v --protocol=gp --usergroup=gateway --user adindu --servercert pin-sha256:RaszCRj9E7cTomU32iJT3nWEuTc9xRbHOhp035fWOXs= vpn-gw2.qvantel.net
-}
-function tmp() {
-	sudo openconnect -v --protocol=gp --usergroup=gateway --user adindu --servercert pin-sha256:RaszCRj9E7cTomU32iJT3nWEuTc9xRbHOhp035fWOXs= vpn-gw3.qvantel.net
-}
-function hel() {
-	sudo openconnect -v --protocol=gp --usergroup=gateway --user adindu --servercert pin-sha256:RaszCRj9E7cTomU32iJT3nWEuTc9xRbHOhp035fWOXs= vpn-gw4.qvantel.net
-}
-function rome() {
-	sudo openconnect -v --protocol=gp --usergroup=gateway --user adindu --servercert pin-sha256:RaszCRj9E7cTomU32iJT3nWEuTc9xRbHOhp035fWOXs= vpn-gw7.qvantel.net
-}
-function hyd() {
-	sudo openconnect -v --protocol=gp --usergroup=gateway --user adindu --servercert pin-sha256:RaszCRj9E7cTomU32iJT3nWEuTc9xRbHOhp035fWOXs= vpn-gw6.qvantel.net
-}
-function singp() {
-	sudo openconnect -v --protocol=gp --usergroup=gateway --user adindu --servercert pin-sha256:RaszCRj9E7cTomU32iJT3nWEuTc9xRbHOhp035fWOXs= vpn-gw8.qvantel.net
-}
-
-function vpnc() {
-	sudo openconnect -v --protocol=gp --usergroup=portal --user adindu vpn-portal.qvantel.net
-}
 ####################################################################################
 # Git aliases
 #####################################################################################
@@ -264,85 +232,6 @@ function g-dif
 ##################################################################
 # System aliases
 ####################################################################
-function mvenv()
-{   
-    cd ~/projects/master_dbss/dbss; 
-    if [[ -v PYENV_VIRTUAL_ENV ]] {
-       pyenv deactivate
-    } 
-    pyenv activate dbss
-    export PYTHONPATH=/Users/adindu/projects/master_dbss/dbss;
-    export PROJECT_ROOT=/Users/adindu/projects/master_dbss/dbss;
-    export PYTHONBREAKPOINT=ipdb.set_trace;
-}
-
-function fgw()
-{
-    cd ~/projects/graphql-gw/graphql-gw
-    if [[ -v VIRTUAL_ENV ]] {
-       pyenv deactivate
-    } 
-    pyenv activate gw_venv
-    export PYTHONBREAKPOINT=ipdb.set_trace;
-}
-
-
-# Acitvate auth service env
-function auth_service()
-{
-    cd ~/projects/auth-service/auth-service
-    if [[ -v VIRTUAL_ENV ]] {
-       source deactivate
-    } 
-    pyenv activate auth2_venv
-    export PYTHONBREAKPOINT=ipdb.set_trace;
-}
-
-
-# Activate dbssprov env
-function dbssprovenv()
-{
-    cd ~/projects/dbssprov/dbssprov
-    source ~/.virtualenvs/dbssprov_venv/bin/activate
-}
-
-# Beeline Georgia environmanet alias
-function bg_venv()
-{   
-    cd ~/projects/master_dbss/dbss; 
-    source ~/.virtualenvs/beeg_venv/bin/activate;
-    export PYTHONPATH=/home/office.zone/adindu/projects/master_dbss/dbss;
-    export PROJECT_ROOT=/home/office.zone/adindu/projects/master_dbss/dbss;
-    export PYTHONBREAKPOINT=ipdb.set_trace;
-}
-
-
-function dbdb()
-{
-  # source ~/.virtualenvs/master_venv/bin/activate;
-   mycli -u django -pdjango dbss;
-}
-
-function om
-{
-	mvenv
-	~/projects/master_dbss/dbss/interfaces/control/manage.py $@
-}
-
-function systests
-{
-    DBSSTEST=1 py.test --nomigrations --ds=system.settings system/functionaltests/tests $@
-}
-
-function sdoer
-{
-    echo $PASSWORD  |sudo -S $@
-}
-
-function beeline_activate
-{
-
-}
 
 #########################################################################################################
 # GIT heart FZF
@@ -404,17 +293,7 @@ bindkey '^g^b' fzf-gb-widget
 ###################################################################################
 # Ke Bindings
 # ################################################################################i
-run-master-tests() {
-    mvenv
-    ./scripts/pytest_all -m
-
-}
 bindkey -s '\Co\Cf' 'vim $(fzf)\n' # Open file
-bindkey -s '\Cm\Cv' 'mvenv\n' # Change to master env
-bindkey -s '\Cg\Cw' 'fgw\n' # Change to master env
-bindkey -s '\Ca\Cs' 'auth_service\n' # Change to master env
-bindkey -s '^m^v^t' run-master-tests # Run master tests
-bindkey -s '\Cp\Cy' 'start_pycharm\n' # start pycharm in tmux
 bindkey -s '\Cg\Cu' 'g-up\n' # start pycharm in tmux
 bindkey -s '\Cd\Cb' 'dbdb\n' # start database dbss
 bindkey -s '\Ct' 'tmux\n' # start pycharm in tmux
@@ -423,8 +302,8 @@ bindkey -s '\Ct' 'tmux\n' # start pycharm in tmux
 # Load pyenv automatically by adding
 # the following to ~/.zshrc:
 
-export PATH="/home/office.zone/adindu/.pyenv/bin:$PATH"
-eval "$(pyenv init -)"
+#export PATH="/home/office.zone/adindu/.pyenv/bin:$PATH"
+#eval "$(pyenv init -)"
 #eval "$(pyenv virtualenv-init -)"
 
 
@@ -445,10 +324,6 @@ if type brew &>/dev/null; then
     autoload -Uz compinit
     compinit
   fi
-export PATH="/usr/local/opt/mysql-client/bin:$PATH"
-export PATH="$PATH:/Users/adindu/.local/bin"
-
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 # Shorten or lengthen the autocompletion list
 # zstyle ':autocomplete:list-choices:*' max-lines 50
